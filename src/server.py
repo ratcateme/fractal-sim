@@ -16,6 +16,7 @@ import random
 import time
 import pickle
 from PyQt4 import QtCore
+import config
 
 class FractalServer(QtCore.QObject):
     clientNumber = QtCore.pyqtSignal(int)
@@ -66,7 +67,7 @@ class FractalServer(QtCore.QObject):
         QueueManager.register('getGeneration', callable=lambda: self.generation)
         QueueManager.register('getResultsPipe', callable=self.getResultsPipe)
         QueueManager.register('getPollPipe', callable=self.getPollPipe)
-        m = QueueManager(address=('', 50000), authkey='FRACTALZ')
+        m = QueueManager(address=('', config.config['ServerPort']), authkey=config.config['AuthKey'])
         print "starting"
         s = m.get_server()
         s.serve_forever()

@@ -17,6 +17,7 @@ import multiprocessing.reduction
 from threading import Thread
 import pickle
 import sys
+import config
 
 class FractalClient(Process):
     def run(self):
@@ -25,7 +26,7 @@ class FractalClient(Process):
         QueueManager.register('getResultsPipe')
         QueueManager.register('getPollPipe')
        
-        self.manager = QueueManager(address=('127.0.0.1', 50000), authkey='FRACTALZ')
+        self.manager = QueueManager(address=(config.config['ServerIP'], config.config['ServerPort']), authkey=config.config['AuthKey'])
         self.manager.connect()
         clientID = self.manager.registerClient()._getvalue()
         print "connected", clientID
