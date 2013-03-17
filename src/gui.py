@@ -24,6 +24,8 @@ class Window(QtGui.QMainWindow):
             else:
                 self.showFullScreen()
             self.fullScreen = not self.fullScreen
+        if event.key() == QtCore.Qt.Key_R:
+            self._statusBar.fractalServer.newFractal()
 
 class StatusBar(QtGui.QStatusBar):
     def __init__(self, fractalDisplay, fractalServer, *args):
